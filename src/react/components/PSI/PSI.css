@@ -4,9 +4,12 @@
     padding: 20px;
 }
 
-.indicator {
-    display: flex;
+h2 {
+    margin-top: 0;
+    font-weight: bold;
+    font-size: 36px;
 }
+
 
 .reading-wrapper {
     display: flex;
@@ -26,9 +29,24 @@
 .descriptor {
     font-size: 24px;
 }
+
 .reading {
     flex: 1;
     font-size: 60px;
     font-weight: bold;
     text-align: right;
+}
+
+.indicator {
+    display: flex;
+}
+
+.indicator div {
+    flex: 1;
+    height: 20px;
+    border: 1px solid #ececec;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

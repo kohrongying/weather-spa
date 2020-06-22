@@ -12,7 +12,7 @@ const INDICATOR = [
 
 const PSI = () => {
   const [data, setData] = React.useState(null)
-  const [qualityIndex, setQualityIndex] = React.useState(1)
+  const [qualityIndex, setQualityIndex] = React.useState(0)
 
   React.useEffect(() => {
     fetchData()
@@ -20,9 +20,9 @@ const PSI = () => {
 
   const fetchData = async () => {
     const response = await WeatherApi.getPSI()
-    setData(response.items[0])
-    renderQuality(response.items[0].readings.psi_twenty_four_hourly.national)
-
+    const data = response.items[0]
+    setData(data)
+    renderQuality(data.readings.psi_twenty_four_hourly.national)
   }
 
   const renderReading = () => {
@@ -56,13 +56,20 @@ const PSI = () => {
   return(
     <React.Fragment>
       <div className="psi" style={{ backgroundColor: INDICATOR[qualityIndex].color}}>
-        <h3>PSI</h3>
+        <h2>PSI</h2>
         {renderReading()}
         
       </div>
       <div className="indicator">
-        {INDICATOR.map(indicator => (
-          <div key={indicator.descriptor} style={{ flex: 1, backgroundColor: indicator.color, height: 20 }}></div>
+        {INDICATOR.map((indicator, index) => (
+          <div 
+            key={indicator.descriptor} 
+            style={{ 
+              backgroundColor: indicator.color, border: qualityIndex === index ? 'none' : '1px soild white'
+            }}
+          >
+            {indicator.maxVal ? `${indicator.minVal} - ${indicator.maxVal}` : `${indicator.minVal} >`} 
+          </div>
         ))}
       </div>
     </React.Fragment>
