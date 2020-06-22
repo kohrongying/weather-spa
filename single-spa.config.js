@@ -3,13 +3,13 @@ import { registerApplication, start } from 'single-spa'
 registerApplication(
   'svelte', 
   () => import('./src/svelte/main.app.js'),
-  () => location.pathname === "/react" ? false : true
+  () => location.pathname === "/svelte"
 );
 
 registerApplication(
   'react',
   () => import('./src/react/main.app.js'),
-  () => location.pathname === "/svelte"  ? false : true
+  () => location.pathname === "/"
 );
 
 start();

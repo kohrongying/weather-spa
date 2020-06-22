@@ -1,0 +1,21 @@
+.grid-container {
+    display: grid;
+    grid-gap: 20px 20px;
+    grid-template-columns: auto auto;
+}
+
+.left {
+    grid-column-start: 1;
+    grid-column-end: 2;
+}
+
+.right {
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+
+.weatherDetail {
+    background-color: #ececec;
+    padding: 20px;
+    margin-bottom: 20px;
+}
