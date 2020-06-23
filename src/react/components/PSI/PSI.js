@@ -25,22 +25,6 @@ const PSI = () => {
     renderQuality(data.readings.psi_twenty_four_hourly.national)
   }
 
-  const renderReading = () => {
-    return (
-      <div className="reading-wrapper">
-        <div className="reading-detail">
-          <div className="descriptor">{INDICATOR[qualityIndex]?.descriptor}</div>
-          <p><i>{new Date(data?.timestamp).toLocaleString()}</i></p>
-
-          <a href="/psi">View more</a>
-        </div>
-        <span className="reading">
-          {data?.readings.psi_twenty_four_hourly.national}
-        </span>
-      </div>
-    )
-  }
-
   const renderQuality = (reading) => {
     if (reading) {
       for(let i=0; i< INDICATOR.length;i++) {
@@ -56,21 +40,17 @@ const PSI = () => {
   return(
     <React.Fragment>
       <div className="psi" style={{ backgroundColor: INDICATOR[qualityIndex].color}}>
-        <h2>PSI</h2>
-        {renderReading()}
         
-      </div>
-      <div className="indicator">
-        {INDICATOR.map((indicator, index) => (
-          <div 
-            key={indicator.descriptor} 
-            style={{ 
-              backgroundColor: indicator.color, border: qualityIndex === index ? 'none' : '1px soild white'
-            }}
-          >
-            {indicator.maxVal ? `${indicator.minVal} - ${indicator.maxVal}` : `${indicator.minVal} >`} 
-          </div>
-        ))}
+        <div className="two-columns">
+          <h2>The PSI is {INDICATOR[qualityIndex].descriptor}</h2>
+          <div className="reading">{data?.readings.psi_twenty_four_hourly.national}</div>
+        </div>
+        
+        <div className="footnote">
+          <div><i>Retrieved on {new Date(data?.timestamp).toLocaleString()}</i></div>
+          <a href="/psi">View more</a>
+        </div>
+        
       </div>
     </React.Fragment>
   )

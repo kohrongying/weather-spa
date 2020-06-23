@@ -2,6 +2,7 @@ import React from "react"
 import WeatherApi from "./api/api"
 import "./App.css"
 import PSI from "./components/PSI/PSI"
+import WeatherDetail from "./components/WeatherDetail/WeatherDetail"
 
 const App = () => {
   const [stations, setStations] = React.useState([])
@@ -21,35 +22,17 @@ const App = () => {
       WeatherApi.getHumidity()
     ])
 
-    let stations = []
-    for (let i=0;i<responses.length;i++) {
-      stations = [...stations, ...responses[i].metadata.stations]
-    }
-    const removedDups = new Set(stations.map(station => station.id))
-    stations = [...removedDups].map(id => stations.find(s => s.id === id)).filter(station => station.id !== station.name)
+    // let stations = []
+    // for (let i=0;i<responses.length;i++) {
+    //   stations = [...stations, ...responses[i].metadata.stations]
+    // }
+    // const removedDups = new Set(stations.map(station => station.id))
+    // stations = [...removedDups].map(id => stations.find(s => s.id === id)).filter(station => station.id !== station.name)
 
-    setStations(stations)
+    setStations(responses[0].metadata.stations)
     setTemps(responses[0].items[0])
     setRainfall(responses[1].items[0])
     setHumidity(responses[2].items[0])
-  }
-
-  const renderStationData = () => {
-    if (stationId) {
-      const station = stations.find(station => station.id === stationId)
-      return (
-        <React.Fragment>
-          <p><i>{station.name}</i></p>
-          <p>Temperature: {temps?.readings?.find(obj => obj.station_id === stationId)?.value} deg C</p>
-          <p>Rainfall: {rainfall?.readings?.find(obj => obj.station_id === stationId)?.value} mm</p>
-          <p>humidity: {humidity?.readings?.find(obj => obj.station_id === stationId)?.value} %</p>
-        </React.Fragment>
-      )
-    } else {
-      return (
-          <p><i>Please click on item</i></p>
-      )
-    }
   }
 
   return(
@@ -66,10 +49,15 @@ const App = () => {
 
       <div className="right">
         
-        <div className="weatherDetail">
-          <h3>Weather</h3>
-          {renderStationData()}
-        </div>
+        {stationId && 
+          <WeatherDetail
+            temperature={temps?.readings?.find(obj => obj.station_id === stationId)?.value}
+            rainfall={rainfall?.readings?.find(obj => obj.station_id === stationId)?.value}
+            humidity={humidity?.readings?.find(obj => obj.station_id === stationId)?.value}
+            timestamp={temps.timestamp}
+            location={stations.find(station => station.id === stationId)?.name}
+          />
+        }
 
         <PSI />
       </div>

@@ -4,49 +4,28 @@
     padding: 20px;
 }
 
-h2 {
-    margin-top: 0;
-    font-weight: bold;
-    font-size: 36px;
-}
-
-
-.reading-wrapper {
+.two-columns {
+    margin-top: 50px;
+    margin-bottom: 30px;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
 
-.reading-detail {
+.psi h2 {
+    margin: 0;
+    font-weight: 800;
+    font-size: 60px;
+    line-height: 50px;
     flex: 1;
-}
-
-.reading-detail p {
-    font-size: 12px;
-    margin-top: 5px;
-}
-
-.descriptor {
-    font-size: 24px;
 }
 
 .reading {
     flex: 1;
     font-size: 60px;
-    font-weight: bold;
+    text-align: right;
+    line-height: 50px;
+}
+
+.footnote {
     text-align: right;
 }
 
-.indicator {
-    display: flex;
-}
-
-.indicator div {
-    flex: 1;
-    height: 20px;
-    border: 1px solid #ececec;
-    font-size: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
