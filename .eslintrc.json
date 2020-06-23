@@ -17,6 +17,9 @@
     "plugins": [
         "react"
     ],
+    "ignorePatterns": [
+        "/dist/*.js", "/dist/*.js.map", "webpack.config.js", "single-spa.config.js"
+    ],
     "rules": {
         "indent": [
             "error",
