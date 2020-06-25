@@ -39,7 +39,7 @@ const PSI = () => {
 
     return(
         <React.Fragment>
-            <div className="psi" style={{ backgroundColor: INDICATOR[qualityIndex].color}}>
+            <div className="psi container" style={{ backgroundColor: INDICATOR[qualityIndex].color}}>
         
                 <div className="two-columns">
                     <h2>The PSI is {INDICATOR[qualityIndex].descriptor}</h2>

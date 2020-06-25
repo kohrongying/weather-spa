@@ -3,9 +3,9 @@ import PropTypes from "prop-types"
 import "./WeatherDetail.css"
 
 const TEMPERATURE_TABLE = [
-    { maxVal: 26, descriptor: "cool" },
-    { maxVal: 30, descriptor: "warm" },
-    { maxVal: 32, descriptor: "hot" },
+    { maxVal: 27, descriptor: "cool" },
+    { maxVal: 31, descriptor: "warm" },
+    { maxVal: 34, descriptor: "hot" },
     { maxVal: 36, descriptor: "sibeh hot" },
 ]
 
@@ -38,14 +38,24 @@ const WeatherDetail = ({
     rainfall,
     humidity,
     timestamp,
-    location
+    stationId,
+    stations,
+    handleSelectChange
 }) => {
     return (
         <React.Fragment>
-            <div className="weather-detail">
+            <div className="weather-detail container" style={{ backgroundColor: "#56CCF2"}}>
       
                 <div className="two-columns">
-                    <h2>It is {getTempDescriptor(temperature)} with {getRainfallDescriptor(rainfall)} at {location}</h2>
+                    <h2>
+                        It is {getTempDescriptor(temperature)} with {getRainfallDescriptor(rainfall)} at <br></br>
+                        <select name="stations" id="stations" onChange={handleSelectChange} value={stationId}>
+                            {stations.map(station => (
+                                <option key={station.id} value={station.id}>{station.name}</option>
+                            ))}
+                        </select>
+                    </h2>
+                    
                     <div className="reading">
                         <div>{temperature} °C</div>
                         <div>{rainfall} mm</div>
@@ -63,11 +73,13 @@ const WeatherDetail = ({
 }
 
 WeatherDetail.propTypes = {
-    temperature: PropTypes.string,
+    temperature: PropTypes.number,
     rainfall: PropTypes.number,
     humidity: PropTypes.number,
     timestamp: PropTypes.string,
-    location: PropTypes.string,
+    stationId: PropTypes.string,
+    stations: PropTypes.array,
+    handleSelectChange: PropTypes.func
 }
 
 export default WeatherDetail

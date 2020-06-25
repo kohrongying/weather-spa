@@ -1,18 +1,39 @@
-.weather-detail {
-    padding: 20px;
-    margin-bottom: 20px;
-    background-color: burlywood;
-}
 
 .weather-detail h2 {
     margin: 0;
     font-weight: 800;
     font-size: 50px;
-    line-height: 40px;
+    line-height: 1;
     flex: 2;
+    max-width: 70%;
 }
 
 .weather-detail .reading div {
     font-size: 20px;
-    line-height: 20px;
+    line-height: 1;
+}
+
+select#stations {
+    background: none;
+    border: none;
+    font-family: "Muli";
+    font-weight: 800;
+    font-size: 40px;
+    max-width: 100%;
+    overflow: hidden;
+    /* white-space: pre; */
+    text-overflow: ellipsis;
+    /* -webkit-appearance: none; */
+    border-bottom: 1px solid black;
+}
+
+
+@media only screen and (max-width: 700px) {
+    .weather-detail h2 {
+        font-size: 40px;
+    }
+
+    select#stations {
+        font-size: 30px;
+    }
 }

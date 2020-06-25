@@ -28,42 +28,43 @@ const App = () => {
         // }
         // const removedDups = new Set(stations.map(station => station.id))
         // stations = [...removedDups].map(id => stations.find(s => s.id === id)).filter(station => station.id !== station.name)
+        
+        const stations = responses[0].metadata.stations
+        stations.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0)) 
 
-        setStations(responses[0].metadata.stations)
+        setStations(stations)
         setTemps(responses[0].items[0])
         setRainfall(responses[1].items[0])
         setHumidity(responses[2].items[0])
+        setStationId(stations[0].id)
+    }
+
+    const handleSelectChange = (event) => {
+        setStationId(event.target.value)
     }
 
     return(
         <>
-            <h1>Weather SG</h1>
-            <div className="grid-container">
-                <div className="left">
-                    {stations.map(station => (
-                        <li key={station.id} onClick={() => setStationId(station.id)}>
-                            {station.name} ({station.id})
-                        </li>
-                    ))}
-                </div>
-
-                <div className="right">
+            <div id="weather-container">
         
-                    {stationId && 
+                {stationId && 
           <WeatherDetail
+              stations={stations}
               temperature={temps?.readings?.find(obj => obj.station_id === stationId)?.value}
               rainfall={rainfall?.readings?.find(obj => obj.station_id === stationId)?.value}
               humidity={humidity?.readings?.find(obj => obj.station_id === stationId)?.value}
               timestamp={temps.timestamp}
-              location={stations.find(station => station.id === stationId)?.name}
+              stationId={stationId}
+              handleSelectChange={handleSelectChange}
           />
-                    }
-
-                    <PSI />
-                </div>
+                }
+            </div>
+            <div id="psi-container">
+                <PSI />
+            </div>
 
       
-            </div>
+            
         </>
     )
 
